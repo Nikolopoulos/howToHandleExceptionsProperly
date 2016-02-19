@@ -5,35 +5,35 @@
  */
 package exception.handler;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Basil Nikolopoulos
  */
-public class ExceptionHandler {
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-    /**
-     * @param args the command line arguments
-     * 
-     * The only true way to handle exceptions
-     * With ideas picked up from 
-     * 
-     * http://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
-     * 
-     * and
-     * 
-     * https://scontent.fath3-1.fna.fbcdn.net/hphotos-xpf1/v/t1.0-9/12717312_1234334576579918_2896678946562161864_n.png?oh=cf7bede685eb96c6dbdb387d667a242f&oe=5760881B
-     */
-    public static void main(String[] args) {
-        
-        try{
-           ArrayList f = null;
-           f.add(new Object());
-        }
-        catch(Exception e){
-            Browser.handle(e);
+public class ExceptionHandler {
+    public static void handle(Exception exception) {
+        String url = "https://stackoverflow.com/search?q=[java]%20"+ exception.toString().substring(0, exception.toString().indexOf("\n") == -1 ? exception.toString().length() : exception.toString().indexOf("\n"));
+
+        if(Desktop.isDesktopSupported()){
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(url));
+            } catch (IOException | URISyntaxException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }else{
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec("xdg-open " + url);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
-    
 }
