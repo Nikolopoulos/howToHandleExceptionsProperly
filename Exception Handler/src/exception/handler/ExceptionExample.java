@@ -32,7 +32,8 @@ public class ExceptionExample {
            f.add(new Object());
         }
         catch(Exception e){
-            ExceptionHandler.handle(e);
+            ExceptionHandler.stackOverflow(e);
+            ExceptionHandler.google(e);
         }
     }
     
