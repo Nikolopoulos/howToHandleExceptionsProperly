@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exception.handler;
+package exception.example;
 
+import exception.handler.ExceptionHandler;
 import java.util.ArrayList;
 
 /**
